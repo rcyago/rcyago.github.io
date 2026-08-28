@@ -6,6 +6,11 @@
 <title>Yago Cavalcante — Data Engineering, Backend Python & IA aplicada</title>
 <meta name="description" content="Portfólio de engenharia de dados: pipelines, APIs, observabilidade e automações com Python, PostgreSQL, Airflow e IA aplicada.">
 
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://rcyago.github.io/">
 <meta property="og:title" content="Yago Cavalcante — Data Engineering, Backend Python & IA aplicada">
@@ -160,12 +165,6 @@
     -webkit-mask-image:linear-gradient(to bottom, #000 90%, transparent 100%);
     mask-image:linear-gradient(to bottom, #000 90%, transparent 100%);
   }
-  .status-chip{
-    position:absolute; z-index:2; left:-8%; bottom:6%;
-    background:var(--surface); border:1px solid var(--rule-strong); border-radius:100px;
-    padding:.3rem .4rem .3rem .5rem; box-shadow:var(--shadow);
-  }
-  .status-chip .pill{font-family:var(--mono)}
   @media (max-width:600px){
     .hero-grid{grid-template-columns:1fr; text-align:left}
     .portrait-frame{width:220px; margin:0 auto 1rem; order:-1}
@@ -212,20 +211,6 @@
 
   /* illustrative mockups */
   .mock-note{font-family:var(--mono); font-size:.66rem; color:var(--dim); text-align:right; margin:.3rem 0 0}
-  .app-mock{border:1px solid var(--rule-strong); border-radius:10px; overflow:hidden; margin:1rem 0 .2rem; background:var(--paper-2); font-size:.8rem}
-  .app-mock .bar{display:flex; align-items:center; gap:.5rem; padding:.5rem .85rem; background:var(--surface); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:.7rem; color:var(--dim)}
-  .app-mock .bar .dots{display:flex; gap:4px}
-  .app-mock .bar .dots span{width:7px; height:7px; border-radius:50%; background:var(--rule-strong); display:block}
-  .app-mock .bar .bell{margin-left:auto; position:relative}
-  .app-mock .bar .bell .badge{position:absolute; top:-5px; right:-8px; background:var(--warn); color:#fff; font-size:.55rem; border-radius:100px; padding:0 4px; font-family:var(--mono)}
-  .app-mock .body{padding:.7rem .9rem .9rem}
-  .mock-row{display:grid; grid-template-columns:1.5fr .8fr .9fr; gap:.6rem; align-items:center; padding:.4rem .1rem; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:.74rem}
-  .mock-row.h{color:var(--dim); text-transform:uppercase; font-size:.6rem; letter-spacing:.06em; border-bottom:1px solid var(--rule-strong)}
-  .mock-row:last-child{border-bottom:none}
-  .pill{display:inline-flex; align-items:center; gap:.35rem; padding:.1rem .5rem; border-radius:100px; font-size:.66rem}
-  .pill::before{content:""; width:6px; height:6px; border-radius:50%}
-  .pill.ok{background:var(--accent-soft); color:var(--accent)} .pill.ok::before{background:var(--accent)}
-  .pill.warn{background:var(--warn-soft); color:var(--warn)} .pill.warn::before{background:var(--warn)}
 
   .cnab-mock{border:1px solid var(--rule-strong); border-radius:10px; background:var(--paper-2); padding:.9rem .9rem .7rem; margin:1rem 0 .2rem; overflow-x:auto}
   .cnab-mock .ruler{font-family:var(--mono); font-size:.6rem; color:var(--dim); white-space:pre}
@@ -293,20 +278,6 @@ function Reveal({ as: Tag = "div", className = "", children, ...rest }) {
 }
 
 const PROJECTS = [
-  {
-    id: "P1",
-    category: "Observabilidade",
-    title: "Painel de observabilidade para pipelines de dados",
-    summary: "Sistema próprio, de autoria integral, que acompanha dezenas de fluxos de extração e reconciliação em produção, com um motor de alertas persistido em banco — porque antes disso, um fluxo quebrado só era descoberto quando alguém sentia falta do dado.",
-    fields: [
-      ["arquitetura", "API própria (Python/FastAPI, Uvicorn) atrás de nginx com autenticação por certificado de cliente (mTLS); frontend estático consumindo a API"],
-      ["persistência", <>PostgreSQL via Supabase — alertas com estado <code>ativo → resolvido</code>, índice único parcial pra nunca duplicar uma condição em aberto</>],
-      ["motor de alertas", "avalia periodicamente múltiplas fontes de regra: falha ou atraso de fluxo, backlog acima do limite, uptime de serviço, execuções com erro, tabelas desatualizadas"],
-      ["integrações", "logs via sshfs, automações via n8n, monitoramento de uptime via Uptime Kuma"],
-    ],
-    mock: "monitor",
-    tags: ["Python", "FastAPI", "PostgreSQL", "Supabase", "nginx / mTLS", "n8n", "Linux"],
-  },
   {
     id: "P2",
     category: "Orquestração",
@@ -408,28 +379,6 @@ const IA_DEV_ITEMS = [
   "noções de MCP e skills/custom context",
 ];
 
-function MonitorMock() {
-  return (
-    <>
-      <div className="app-mock" role="img" aria-label="Recriação ilustrativa do painel: cabeçalho com sino de alertas e tabela de fluxos com status.">
-        <div className="bar">
-          <span className="dots"><span></span><span></span><span></span></span>
-          <span>observabilidade · fluxos</span>
-          <span className="bell">🔔<span className="badge">4</span></span>
-        </div>
-        <div className="body">
-          <div className="mock-row h"><span>fluxo</span><span>última execução</span><span>status</span></div>
-          <div className="mock-row"><span>fluxo_a</span><span>08:35</span><span className="pill ok">ok</span></div>
-          <div className="mock-row"><span>fluxo_b</span><span>08:35</span><span className="pill ok">ok</span></div>
-          <div className="mock-row"><span>fluxo_c</span><span>07:10</span><span className="pill warn">backlog</span></div>
-          <div className="mock-row"><span>automação_d</span><span>ontem</span><span className="pill warn">erro</span></div>
-        </div>
-      </div>
-      <p className="mock-note">recriação ilustrativa da interface — não é um print real</p>
-    </>
-  );
-}
-
 function CnabMock() {
   return (
     <>
@@ -470,7 +419,6 @@ function ProjectCard({ p, index, activeTag, setActiveTag }) {
           </React.Fragment>
         ))}
       </dl>
-      {p.mock === "monitor" && <MonitorMock />}
       {p.mock === "cnab" && <CnabMock />}
       <div className="tags">
         {p.tags.map((t) => (
@@ -534,7 +482,6 @@ function App() {
             <div className="portrait-frame">
               <div className="blob" aria-hidden="true"></div>
               <img src={PORTRAIT_SRC} alt="Retrato de Yago Cavalcante" />
-              <div className="status-chip"><span className="pill ok">disponível</span></div>
             </div>
           </div>
         </header>
