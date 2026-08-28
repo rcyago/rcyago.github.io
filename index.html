@@ -31,7 +31,7 @@
   "telephone": "+5511954468564",
   "url": "https://rcyago.github.io/",
   "sameAs": ["https://github.com/rcyago", "https://www.linkedin.com/in/yago-cavalcante-46a4521a4/"],
-  "knowsAbout": ["Python", "SQL", "PostgreSQL", "Supabase", "FastAPI", "Apache Airflow", "APIs REST", "IA aplicada", "Automação de dados"]
+  "knowsAbout": ["Python", "SQL", "PostgreSQL", "FastAPI", "Apache Airflow", "APIs REST", "IA aplicada", "Automação de dados"]
 }
 </script>
 
@@ -332,17 +332,17 @@ const PROJECTS = [
   {
     id: "P6",
     category: "Data Lake / Storage analítico",
-    title: "Arquitetura de estoque/posições com Parquet, DuckDB e Supabase",
-    summary: "Arquitetura para separar histórico bruto de consumo operacional: snapshots diários de estoque/posições preservados em Parquet, consulta analítica com DuckDB/Polars e publicação de estado atual/agregados no PostgreSQL/Supabase.",
-    strip: ["API administradora", "Airflow/Python", "snapshot raw (Parquet)", "validação/tipagem", "Supabase/Postgres"],
+    title: "Arquitetura de estoque/posições com Parquet, DuckDB e PostgreSQL",
+    summary: "Arquitetura para separar histórico bruto de consumo operacional: snapshots diários de estoque/posições preservados em Parquet, consulta analítica com DuckDB/Polars e publicação de estado atual/agregados no PostgreSQL.",
+    strip: ["API administradora", "Airflow/Python", "snapshot raw (Parquet)", "validação/tipagem", "PostgreSQL"],
     fields: [
       ["problema", "cargas diárias volumosas de estoque/posições não devem transformar o banco operacional em depósito bruto de histórico"],
-      ["arquitetura", "API administradora → Airflow/Python → snapshot raw em Parquet → validação/tipagem/deduplicação → DuckDB/Polars para histórico → Supabase/Postgres para estado atual e agregados"],
-      ["decisão técnica", "Parquet para histórico colunar/compacto; Postgres para operação/serving; DuckDB como engine SQL leve para consultas analíticas"],
+      ["arquitetura", "API administradora → Airflow/Python → snapshot raw em Parquet → validação/tipagem/deduplicação → DuckDB/Polars para histórico → PostgreSQL para estado atual e agregados"],
+      ["decisão técnica", "Parquet para histórico colunar/compacto; PostgreSQL para operação/serving; DuckDB como engine SQL leve para consultas analíticas"],
       ["evolução", "fundamentos de Delta Lake, CDC lógico, time travel e lakehouse como próximos passos quando volume e necessidade de MERGE/versionamento justificarem"],
       ["cuidado", "não expõe nomes de fundos, administradores, clientes ou dados reais"],
     ],
-    tags: ["Python", "Airflow", "Parquet", "DuckDB", "PostgreSQL", "Supabase", "OLTP/OLAP", "Data Lake", "CDC lógico"],
+    tags: ["Python", "Airflow", "Parquet", "DuckDB", "PostgreSQL", "OLTP/OLAP", "Data Lake", "CDC lógico"],
   },
   {
     id: "P7",
@@ -356,13 +356,13 @@ const PROJECTS = [
       ["qualidade", "tipagem, validação de campos obrigatórios, padronização, deduplicação e registro de status/erro"],
       ["segurança", "sem expor documentos reais ou dados sensíveis"],
     ],
-    tags: ["Python", "FastAPI", "API OpenAI", "API Anthropic", "OCR", "PostgreSQL", "Supabase", "IA aplicada", "Documentos"],
+    tags: ["Python", "FastAPI", "API OpenAI", "API Anthropic", "OCR", "PostgreSQL", "IA aplicada", "Documentos"],
   },
 ];
 
 const STACK = [
   { group: "Linguagens & backend", items: ["Python", "SQL", "FastAPI", "APIs REST", "JavaScript/HTML/CSS básico"] },
-  { group: "Bancos & dados", items: ["PostgreSQL", "Supabase", "Schemas", "RLS", "Roles / policies", "GRANT", "Constraints", "Índices"] },
+  { group: "Bancos & dados", items: ["PostgreSQL", "Schemas", "RLS", "Roles / policies", "GRANT", "Constraints", "Índices"] },
   { group: "Orquestração & automação", items: ["Apache Airflow", "DAGs", "Sensores", "Retries", "n8n", "cron"] },
   { group: "Storage & analytics", items: ["Parquet", "DuckDB", "Data Lake / S3", "OLTP/OLAP", "Delta Lake (fundamentos)", "CDC lógico", "Time travel"] },
   { group: "IA aplicada", items: ["API OpenAI", "API Anthropic (Claude)", "OCR (noções)", "Classificação de texto", "Extração semântica", "Deduplicação", "MCP (noções)"] },
@@ -461,7 +461,7 @@ function App() {
               <p className="eyebrow">Data Engineering | Backend Python | IA aplicada</p>
               <h1>Yago Cavalcante — dados em <em>produção</em>, de ponta a ponta.</h1>
               <p className="role">Pipelines, APIs, observabilidade e automações com Python, PostgreSQL, Airflow e IA aplicada.</p>
-              <p className="lede">Construo pipelines, APIs e automações de dados com Python, PostgreSQL/Supabase, FastAPI, Airflow e LLMs, conectando fontes externas, tratamento de dados, backend e operação em ambientes reais de produção.</p>
+              <p className="lede">Construo pipelines, APIs e automações de dados com Python, PostgreSQL, FastAPI, Airflow e LLMs, conectando fontes externas, tratamento de dados, backend e operação em ambientes reais de produção.</p>
               <div className="hero-pipe" aria-hidden="true">
                 <div className="track"><span className="pulse"></span></div>
                 <div className="labels">
