@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yago Cavalcante — Data Engineering, Backend Python & IA aplicada</title>
+<meta name="description" content="Portfólio de engenharia de dados: pipelines, APIs, observabilidade e automações com Python, PostgreSQL, Airflow e IA aplicada.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Yago Cavalcante — Data Engineering, Backend Python & IA aplicada">
+<meta property="og:description" content="Pipelines, APIs, observabilidade e automações com Python, PostgreSQL, Airflow e IA aplicada.">
+<meta property="og:image" content="assets/portrait.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yago Cavalcante — Data Engineering, Backend Python & IA aplicada">
+<meta name="twitter:description" content="Pipelines, APIs, observabilidade e automações com Python, PostgreSQL, Airflow e IA aplicada.">
+<meta name="twitter:image" content="assets/portrait.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Yago Rodrigues Cavalcante",
+  "jobTitle": "Data Engineer / Backend Python",
+  "email": "mailto:yago.cavalcante@outlook.com.br",
+  "telephone": "+5511954468564",
+  "url": "",
+  "knowsAbout": ["Python", "SQL", "PostgreSQL", "Supabase", "FastAPI", "Apache Airflow", "APIs REST", "IA aplicada", "Automação de dados"]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eceef5; --paper-2:#e2e5f0; --surface:#f8f8fc;
+    --ink:#1c2036; --dim:#5c6280;
+    --rule:rgba(28,32,54,.14); --rule-strong:rgba(28,32,54,.28);
+    --accent:#4340a8; --accent-2:#7b3fb0; --accent-soft:rgba(67,64,168,.10);
+    --warn:#a34d2c; --warn-soft:rgba(163,77,44,.12);
+    --shadow:0 1px 2px rgba(18,20,36,.05), 0 16px 36px rgba(18,20,36,.08);
+    --display:"Big Shoulders Display", "Arial Narrow", sans-serif;
+    --sans:"Work Sans", -apple-system, "Segoe UI", sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+    --maxw:920px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#12132a; --paper-2:#191a35; --surface:#171833;
+      --ink:#e8e9f5; --dim:#9a9fc0;
+      --rule:rgba(232,233,245,.12); --rule-strong:rgba(232,233,245,.24);
+      --accent:#9b98ff; --accent-2:#d19bf5; --accent-soft:rgba(155,152,255,.14);
+      --warn:#e0966d; --warn-soft:rgba(224,150,109,.14);
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 36px rgba(0,0,0,.45);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft)}
+  a{color:var(--accent)}
+  #root{overflow-x:hidden}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 1.5rem}
+
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none} }
+
+  nav.top{
+    position:sticky; top:0; z-index:20;
+    backdrop-filter:saturate(1.2) blur(10px);
+    background:color-mix(in srgb, var(--paper) 82%, transparent);
+    border-bottom:1px solid var(--rule);
+  }
+  nav.top .wrap{display:flex; align-items:center; justify-content:space-between; padding:0.9rem 1.5rem}
+  .brand{font-family:var(--display); font-weight:700; font-size:1.3rem; letter-spacing:.01em}
+  .brand span{color:var(--accent)}
+  nav.top ul{list-style:none; display:flex; gap:1.6rem; margin:0; padding:0; font-size:.88rem}
+  nav.top a{text-decoration:none; color:var(--dim); font-weight:500}
+  nav.top a:hover{color:var(--ink)}
+
+  /* ---- hero ---- */
+  header.hero{padding:4.5rem 0 3.5rem}
+  .hero-grid{display:grid; grid-template-columns:1fr auto; gap:2.4rem; align-items:center}
+  .eyebrow{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 1rem; display:flex; align-items:center; gap:.5rem;
+  }
+  .eyebrow::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent-2)}
+  h1{
+    font-family:var(--display); font-weight:700; font-size:clamp(3rem,8vw,5rem);
+    line-height:0.96; letter-spacing:0; margin:0 0 .7rem; text-wrap:balance;
+    text-transform:uppercase;
+  }
+  h1 em{
+    font-style:normal; font-weight:800;
+    background:linear-gradient(100deg, var(--accent), var(--accent-2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .role{font-size:1.15rem; color:var(--dim); margin:0 0 1.4rem; max-width:38rem}
+  .lede{font-size:1.02rem; color:var(--dim); max-width:42rem; margin:0 0 1.6rem}
+  .hero-pipe{max-width:34rem; margin:0 0 2rem}
+  .hero-pipe .track{position:relative; height:2px; background:var(--rule-strong); border-radius:2px}
+  .hero-pipe .pulse{
+    position:absolute; top:50%; left:0; width:9px; height:9px; margin-top:-4.5px;
+    border-radius:50%; background:linear-gradient(90deg, var(--accent), var(--accent-2));
+    box-shadow:0 0 0 5px var(--accent-soft);
+    animation:pipe-move 4.5s cubic-bezier(.65,0,.35,1) infinite;
+  }
+  @keyframes pipe-move{
+    0%, 6%{left:0%}
+    28%, 36%{left:33.3%}
+    58%, 66%{left:66.6%}
+    88%, 100%{left:calc(100% - 9px)}
+  }
+  .hero-pipe .stops{position:relative; height:0}
+  .hero-pipe .stops span{position:absolute; top:-4px; width:6px; height:6px; border-radius:50%; background:var(--rule-strong)}
+  .hero-pipe .labels{
+    display:flex; justify-content:space-between; margin-top:.6rem;
+    font-family:var(--mono); font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; color:var(--dim);
+  }
+  .hero-pipe .labels span:last-child{color:var(--accent)}
+  @media (prefers-reduced-motion: reduce){
+    .hero-pipe .pulse{animation:none; left:calc(100% - 9px)}
+  }
+  .contact-row{display:flex; gap:1.2rem; flex-wrap:wrap; font-family:var(--mono); font-size:.85rem}
+  .contact-row a{text-decoration:none; border-bottom:1px solid var(--rule-strong); padding-bottom:1px}
+  .contact-row a:hover{border-color:var(--accent)}
+
+  .cta-row{display:flex; gap:.7rem; flex-wrap:wrap; margin:0 0 1.4rem}
+  .btn{
+    font-family:var(--sans); font-size:.86rem; font-weight:600; text-decoration:none;
+    padding:.62rem 1.1rem; border-radius:8px; border:1px solid var(--rule-strong);
+    color:var(--ink); background:var(--surface); cursor:pointer; transition:border-color .2s, background .2s, color .2s;
+  }
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+  .btn.primary:hover{background:var(--accent-2); border-color:var(--accent-2)}
+  .btn:not(.primary):hover{border-color:var(--accent); color:var(--accent)}
+  .btn:focus-visible, .tag:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+  .portrait-frame{
+    position:relative; width:280px; flex-shrink:0; padding-top:1rem;
+  }
+  .portrait-frame .blob{
+    position:absolute; z-index:0; inset:-8% -22% 6% -22%;
+    background:
+      radial-gradient(circle at 42% 30%, var(--accent) 0%, transparent 60%),
+      radial-gradient(circle at 62% 62%, var(--accent-2) 0%, transparent 62%);
+    filter:blur(38px); opacity:.55;
+  }
+  .portrait-frame img{
+    position:relative; z-index:1; display:block; width:100%; height:auto;
+    filter:grayscale(1) contrast(1.1);
+    -webkit-mask-image:linear-gradient(to bottom, #000 90%, transparent 100%);
+    mask-image:linear-gradient(to bottom, #000 90%, transparent 100%);
+  }
+  .status-chip{
+    position:absolute; z-index:2; left:-8%; bottom:6%;
+    background:var(--surface); border:1px solid var(--rule-strong); border-radius:100px;
+    padding:.3rem .4rem .3rem .5rem; box-shadow:var(--shadow);
+  }
+  .status-chip .pill{font-family:var(--mono)}
+  @media (max-width:600px){
+    .hero-grid{grid-template-columns:1fr; text-align:left}
+    .portrait-frame{width:220px; margin:0 auto 1rem; order:-1}
+  }
+
+  /* ---- section framing ---- */
+  section{padding:3.2rem 0}
+  .section-head{display:flex; align-items:baseline; gap:1rem; margin-bottom:.6rem}
+  .section-head h2{font-family:var(--display); font-size:2rem; font-weight:700; margin:0; text-transform:uppercase; letter-spacing:.01em}
+  .section-head .idx{font-family:var(--mono); font-size:.78rem; color:var(--accent)}
+  .section-note{color:var(--dim); font-size:.96rem; max-width:44rem; margin:0 0 2rem}
+
+  /* ---- project cards ---- */
+  .grid{display:grid; gap:1.1rem}
+  .card{
+    background:var(--surface); border:1px solid var(--rule); border-radius:14px;
+    padding:1.6rem 1.7rem 1.7rem; box-shadow:var(--shadow);
+    transition:opacity .35s ease, transform .35s ease, border-color .35s ease;
+  }
+  .card.dim{opacity:.38}
+  .card:hover{border-color:var(--rule-strong)}
+  .card-head{display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap}
+  .card-num{font-family:var(--mono); font-size:.7rem; color:var(--accent); letter-spacing:.1em; text-transform:uppercase}
+  .card{transition:opacity .35s ease, transform .25s ease, border-color .35s ease, box-shadow .25s ease}
+  .card:hover{transform:translateY(-3px); box-shadow:0 1px 2px rgba(18,20,36,.06), 0 20px 40px rgba(18,20,36,.10)}
+  @media (prefers-reduced-motion: reduce){ .card:hover{transform:none} }
+  .card h3{font-family:var(--display); font-size:1.5rem; font-weight:700; margin:.3rem 0 .6rem; letter-spacing:.005em}
+  .card .summary{font-size:.96rem; color:var(--ink); margin:0 0 1rem; max-width:56rem}
+  dl.fields{display:grid; grid-template-columns:8rem 1fr; gap:.55rem 1rem; margin:0 0 1rem; font-size:.88rem}
+  dl.fields dt{font-family:var(--mono); font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--dim); padding-top:.15rem}
+  dl.fields dd{margin:0; color:var(--ink)}
+  dl.fields code{font-family:var(--mono); font-size:.85em; background:var(--paper-2); padding:.05rem .4rem; border-radius:4px}
+  @media (max-width:560px){ dl.fields{grid-template-columns:1fr} dl.fields dt{padding-top:0} }
+
+  .strip{display:flex; align-items:center; gap:.3rem; flex-wrap:wrap; font-family:var(--mono); font-size:.76rem; margin:.7rem 0}
+  .strip .node{border:1px solid var(--rule-strong); border-radius:6px; padding:.26rem .58rem; background:var(--paper-2)}
+  .strip .arrow{color:var(--dim)}
+
+  .tags{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.3rem}
+  .tag{font-family:var(--mono); font-size:.71rem; padding:.16rem .58rem; border-radius:100px; background:var(--accent-soft); color:var(--accent); white-space:nowrap; border:1px solid transparent; cursor:pointer; transition:background .2s, color .2s, border-color .2s; appearance:none; -webkit-appearance:none; line-height:normal; margin:0}
+  .tag:hover{border-color:var(--accent)}
+  .tag.warn{background:var(--warn-soft); color:var(--warn)}
+  .tag.active{background:var(--accent); color:#fff}
+
+  /* illustrative mockups */
+  .mock-note{font-family:var(--mono); font-size:.66rem; color:var(--dim); text-align:right; margin:.3rem 0 0}
+  .app-mock{border:1px solid var(--rule-strong); border-radius:10px; overflow:hidden; margin:1rem 0 .2rem; background:var(--paper-2); font-size:.8rem}
+  .app-mock .bar{display:flex; align-items:center; gap:.5rem; padding:.5rem .85rem; background:var(--surface); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:.7rem; color:var(--dim)}
+  .app-mock .bar .dots{display:flex; gap:4px}
+  .app-mock .bar .dots span{width:7px; height:7px; border-radius:50%; background:var(--rule-strong); display:block}
+  .app-mock .bar .bell{margin-left:auto; position:relative}
+  .app-mock .bar .bell .badge{position:absolute; top:-5px; right:-8px; background:var(--warn); color:#fff; font-size:.55rem; border-radius:100px; padding:0 4px; font-family:var(--mono)}
+  .app-mock .body{padding:.7rem .9rem .9rem}
+  .mock-row{display:grid; grid-template-columns:1.5fr .8fr .9fr; gap:.6rem; align-items:center; padding:.4rem .1rem; border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:.74rem}
+  .mock-row.h{color:var(--dim); text-transform:uppercase; font-size:.6rem; letter-spacing:.06em; border-bottom:1px solid var(--rule-strong)}
+  .mock-row:last-child{border-bottom:none}
+  .pill{display:inline-flex; align-items:center; gap:.35rem; padding:.1rem .5rem; border-radius:100px; font-size:.66rem}
+  .pill::before{content:""; width:6px; height:6px; border-radius:50%}
+  .pill.ok{background:var(--accent-soft); color:var(--accent)} .pill.ok::before{background:var(--accent)}
+  .pill.warn{background:var(--warn-soft); color:var(--warn)} .pill.warn::before{background:var(--warn)}
+
+  .cnab-mock{border:1px solid var(--rule-strong); border-radius:10px; background:var(--paper-2); padding:.9rem .9rem .7rem; margin:1rem 0 .2rem; overflow-x:auto}
+  .cnab-mock .ruler{font-family:var(--mono); font-size:.6rem; color:var(--dim); white-space:pre}
+  .cnab-mock .record{font-family:var(--mono); font-size:.72rem; white-space:pre; margin-top:.25rem; line-height:1.9}
+  .cnab-mock .f1{color:var(--accent)} .cnab-mock .f2{color:var(--accent-2)} .cnab-mock .f3{color:var(--dim)}
+
+  /* ---- ia no desenvolvimento ---- */
+  .ia-dev-text{font-size:.98rem; color:var(--ink); max-width:56rem; margin:0 0 1.2rem}
+  .ia-dev-list{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:.6rem .9rem}
+  .ia-dev-list li{
+    font-size:.9rem; color:var(--ink); padding:.55rem .7rem; border:1px solid var(--rule);
+    border-radius:8px; background:var(--surface); display:flex; align-items:baseline; gap:.5rem;
+  }
+  .ia-dev-list li::before{content:"→"; color:var(--accent); font-family:var(--mono); flex-shrink:0}
+
+  /* ---- stack ---- */
+  .stack-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.1rem}
+  .stack-group h4{font-family:var(--mono); font-size:.71rem; letter-spacing:.08em; text-transform:uppercase; color:var(--dim); margin:0 0 .7rem}
+  .stack-group .tags .tag{background:transparent; border:1px solid var(--rule-strong); color:var(--ink)}
+  .stack-group .tags .tag.active{background:var(--accent); color:#fff; border-color:var(--accent)}
+  .filter-hint{font-family:var(--mono); font-size:.74rem; color:var(--dim); margin:1.4rem 0 0}
+  .filter-hint button{font-family:var(--mono); font-size:.74rem; color:var(--accent); background:none; border:none; cursor:pointer; padding:0; text-decoration:underline}
+
+  /* ---- footer ---- */
+  footer{margin-top:2rem; padding:2.2rem 0 4rem; border-top:1px solid var(--rule-strong); display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:1rem}
+  footer .note{color:var(--dim); font-size:.88rem; max-width:36rem}
+  footer .stamp{font-family:var(--mono); font-size:.78rem; color:var(--dim); text-align:right}
+  @media (max-width:560px){ footer{flex-direction:column} footer .stamp{text-align:left} }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const PORTRAIT_SRC = "assets/portrait.png";
+
+const LINKEDIN_URL = "#";
+const GITHUB_URL = "#";
+const CV_URL = "#";
+
+function useReveal() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { el.classList.add("in"); io.unobserve(el); }
+    }, { threshold: 0.12 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return ref;
+}
+
+function Reveal({ as: Tag = "div", className = "", children, ...rest }) {
+  const ref = useReveal();
+  return <Tag ref={ref} className={`reveal ${className}`} {...rest}>{children}</Tag>;
+}
+
+const PROJECTS = [
+  {
+    id: "P1",
+    category: "Observabilidade",
+    title: "Painel de observabilidade para pipelines de dados",
+    summary: "Sistema próprio, de autoria integral, que acompanha dezenas de fluxos de extração e reconciliação em produção, com um motor de alertas persistido em banco — porque antes disso, um fluxo quebrado só era descoberto quando alguém sentia falta do dado.",
+    fields: [
+      ["arquitetura", "API própria (Python/FastAPI, Uvicorn) atrás de nginx com autenticação por certificado de cliente (mTLS); frontend estático consumindo a API"],
+      ["persistência", <>PostgreSQL via Supabase — alertas com estado <code>ativo → resolvido</code>, índice único parcial pra nunca duplicar uma condição em aberto</>],
+      ["motor de alertas", "avalia periodicamente múltiplas fontes de regra: falha ou atraso de fluxo, backlog acima do limite, uptime de serviço, execuções com erro, tabelas desatualizadas"],
+      ["integrações", "logs via sshfs, automações via n8n, monitoramento de uptime via Uptime Kuma"],
+    ],
+    mock: "monitor",
+    tags: ["Python", "FastAPI", "PostgreSQL", "Supabase", "nginx / mTLS", "n8n", "Linux"],
+  },
+  {
+    id: "P2",
+    category: "Orquestração",
+    title: "Orquestração de pipelines com Apache Airflow",
+    summary: "DAGs que extraem dados de múltiplas fontes em paralelo, esperam todas terminarem via sensor e só então consolidam — a diferença entre descobrir uma fonte fora do ar de manhã e descobrir horas depois, quando o dado já era necessário.",
+    strip: ["fonte_a", "fonte_b", "ExternalTaskSensor", "consolidado", "fonte_c"],
+    fields: [
+      ["agendamento", <>disparo fixo para extração; um segundo padrão encadeia DAGs por evento (<code>Asset</code>) — a próxima começa quando a anterior publica, sem esperar o relógio</>],
+      ["decisão de escala", "avaliei Kafka pra desacoplar consumidores de um pipeline de classificação e decidi não migrar — nenhum fluxo hoje tem múltiplos consumidores independentes de alto volume; cron + Airflow resolve o problema real"],
+    ],
+    tags: ["Apache Airflow", "Python", "DAGs orientados a evento"],
+  },
+  {
+    id: "P3",
+    category: "IA aplicada",
+    title: "Agente de IA para triagem de conteúdo",
+    summary: "Pipeline que varre publicações oficiais diariamente, filtra por palavra-chave relevante ao negócio e classifica com IA o que realmente importa — substitui a leitura manual, gastando tokens só no que já passou por um filtro determinístico.",
+    strip: ["coleta_diaria", "classificacao_ia", "publicacao"],
+    fields: [
+      ["filtro", "varredura por palavra-chave antes de qualquer chamada de IA, pra não gastar tokens classificando o que já é claramente irrelevante"],
+      ["classificação", "chamada à API da OpenAI pra julgar relevância do que passou o filtro, publicando o resultado pra consumo posterior"],
+      ["orquestração", "encadeado como os demais DAGs — cada etapa dispara quando a anterior publica"],
+    ],
+    tags: ["API OpenAI", "Apache Airflow", "Python", "Classificação de texto"],
+  },
+  {
+    id: "P4",
+    category: "Arquivo bancário",
+    title: "Gerador de arquivo bancário (CNAB) a partir de planilha Excel",
+    summary: "Script que converte um cronograma de amortização calculado e validado em Excel para o layout de posições fixas exigido pelo banco — enquanto uma integração via API não sai do papel.",
+    mock: "cnab",
+    fields: [
+      ["entrada", <>CSV exportado do Excel — decisão deliberada de não usar <code>openpyxl</code>: a exportação manual já acontece antes de rodar o script, então a dependência não eliminaria passo nenhum</>],
+      ["o script nunca calcula", "toda a matemática financeira é feita e validada em Excel; o script só lê, valida e converte para o layout de posições fixas"],
+      ["arquitetura", "ports/adapters — o núcleo de conversão não sabe como o CSV chega, abrindo caminho pra automação futura sem tocar na lógica de negócio"],
+      ["ambiguidade real", "o layout não segue um padrão único de mercado — mapeei implementações divergentes de parceiros distintos numa matriz de rastreabilidade antes de fixar a saída"],
+    ],
+    tags: ["Python", "parsing de layout fixo", "CNAB400 / CNAB444", "Decimal / datas BR"],
+  },
+  {
+    id: "P5",
+    category: "Infraestrutura",
+    title: "Administração de infraestrutura e hardening de segurança",
+    summary: "Servidores Linux de produção sob minha responsabilidade direta — provisionamento, deploy dos serviços acima e auditorias periódicas que encontram (e corrigem) problemas reais antes que virem incidente.",
+    fields: [
+      ["segurança", "revisão de hardening de sessão e autenticação, com correção de uma falha que expunha sessões de usuário a roubo via XSS"],
+      ["confiabilidade", "diagnóstico e eliminação de um serviço órfão consumindo recursos sem tráfego real, via análise de logs e systemd"],
+      ["resiliência", "camada de cache no frontend com TTL e fallback para o último dado bom, reduzindo a dependência da qualidade da conexão"],
+    ],
+    tags: ["SSH / Linux", "nginx", "systemd", "hardening de sessão", "segurança"],
+  },
+  {
+    id: "P6",
+    category: "Data Lake / Storage analítico",
+    title: "Arquitetura de estoque/posições com Parquet, DuckDB e Supabase",
+    summary: "Arquitetura para separar histórico bruto de consumo operacional: snapshots diários de estoque/posições preservados em Parquet, consulta analítica com DuckDB/Polars e publicação de estado atual/agregados no PostgreSQL/Supabase.",
+    strip: ["API administradora", "Airflow/Python", "snapshot raw (Parquet)", "validação/tipagem", "Supabase/Postgres"],
+    fields: [
+      ["problema", "cargas diárias volumosas de estoque/posições não devem transformar o banco operacional em depósito bruto de histórico"],
+      ["arquitetura", "API administradora → Airflow/Python → snapshot raw em Parquet → validação/tipagem/deduplicação → DuckDB/Polars para histórico → Supabase/Postgres para estado atual e agregados"],
+      ["decisão técnica", "Parquet para histórico colunar/compacto; Postgres para operação/serving; DuckDB como engine SQL leve para consultas analíticas"],
+      ["evolução", "fundamentos de Delta Lake, CDC lógico, time travel e lakehouse como próximos passos quando volume e necessidade de MERGE/versionamento justificarem"],
+      ["cuidado", "não expõe nomes de fundos, administradores, clientes ou dados reais"],
+    ],
+    tags: ["Python", "Airflow", "Parquet", "DuckDB", "PostgreSQL", "Supabase", "OLTP/OLAP", "Data Lake", "CDC lógico"],
+  },
+  {
+    id: "P7",
+    category: "IA aplicada / Backend",
+    title: "Processamento de documentos com IA, OCR e APIs",
+    summary: "Pipeline para extrair, normalizar, classificar e enriquecer informações de documentos e textos usando Python, APIs, OCR/noções e LLMs, com validações antes de persistir os resultados.",
+    fields: [
+      ["entrada", "PDFs, imagens, planilhas, textos ou documentos estruturados/semi-estruturados"],
+      ["backend", "FastAPI para organizar endpoints e serviços de processamento"],
+      ["IA", "OpenAI API/Claude para classificação, extração semântica, deduplicação e enriquecimento"],
+      ["qualidade", "tipagem, validação de campos obrigatórios, padronização, deduplicação e registro de status/erro"],
+      ["segurança", "sem expor documentos reais ou dados sensíveis"],
+    ],
+    tags: ["Python", "FastAPI", "API OpenAI", "API Anthropic", "OCR", "PostgreSQL", "Supabase", "IA aplicada", "Documentos"],
+  },
+];
+
+const STACK = [
+  { group: "Linguagens & backend", items: ["Python", "SQL", "FastAPI", "APIs REST", "JavaScript/HTML/CSS básico"] },
+  { group: "Bancos & dados", items: ["PostgreSQL", "Supabase", "Schemas", "RLS", "Roles / policies", "GRANT", "Constraints", "Índices"] },
+  { group: "Orquestração & automação", items: ["Apache Airflow", "DAGs", "Sensores", "Retries", "n8n", "cron"] },
+  { group: "Storage & analytics", items: ["Parquet", "DuckDB", "Data Lake / S3", "OLTP/OLAP", "Delta Lake (fundamentos)", "CDC lógico", "Time travel"] },
+  { group: "IA aplicada", items: ["API OpenAI", "API Anthropic (Claude)", "OCR (noções)", "Classificação de texto", "Extração semântica", "Deduplicação", "MCP (noções)"] },
+  { group: "Infra & DevOps", items: ["Linux", "nginx", "Uvicorn", "mTLS", "systemd", "Docker (básico)", "Git/GitHub", "Uptime Kuma"] },
+  { group: "Aplicado a finanças/dados", items: ["Processamento de arquivos bancários", "CNAB", "Conciliação de dados", "Automação de processos", "Crédito/FIDC (sem dados sensíveis)"] },
+];
+
+const IA_DEV_ITEMS = [
+  "especificação de tarefas técnicas",
+  "criação de prompts e arquivos de contexto .md",
+  "revisão de código gerado",
+  "testes manuais/automatizados quando aplicável",
+  "documentação técnica",
+  "noções de MCP e skills/custom context",
+];
+
+function MonitorMock() {
+  return (
+    <>
+      <div className="app-mock" role="img" aria-label="Recriação ilustrativa do painel: cabeçalho com sino de alertas e tabela de fluxos com status.">
+        <div className="bar">
+          <span className="dots"><span></span><span></span><span></span></span>
+          <span>observabilidade · fluxos</span>
+          <span className="bell">🔔<span className="badge">4</span></span>
+        </div>
+        <div className="body">
+          <div className="mock-row h"><span>fluxo</span><span>última execução</span><span>status</span></div>
+          <div className="mock-row"><span>fluxo_a</span><span>08:35</span><span className="pill ok">ok</span></div>
+          <div className="mock-row"><span>fluxo_b</span><span>08:35</span><span className="pill ok">ok</span></div>
+          <div className="mock-row"><span>fluxo_c</span><span>07:10</span><span className="pill warn">backlog</span></div>
+          <div className="mock-row"><span>automação_d</span><span>ontem</span><span className="pill warn">erro</span></div>
+        </div>
+      </div>
+      <p className="mock-note">recriação ilustrativa da interface — não é um print real</p>
+    </>
+  );
+}
+
+function CnabMock() {
+  return (
+    <>
+      <div className="cnab-mock" role="img" aria-label="Recriação ilustrativa de um registro CNAB de posições fixas, com campos coloridos por tipo de dado, sobre uma régua de colunas.">
+        <div className="ruler">{"0        1         2         3         4         5\n0234567890123456789012345678901234567890123456789012"}</div>
+        <div className="record">
+          <span className="f1">1REMESSA01</span><span className="f2">000001999</span><span className="f3">0000000012345678</span><span className="f1">21082026</span><span className="f2">0000000229181</span>
+        </div>
+      </div>
+      <p className="mock-note">recriação ilustrativa do layout — não é um arquivo real de remessa</p>
+    </>
+  );
+}
+
+function ProjectCard({ p, index, activeTag, setActiveTag }) {
+  const dim = activeTag && !p.tags.includes(activeTag);
+  return (
+    <Reveal as="article" className={`card ${dim ? "dim" : ""}`}>
+      <div className="card-head">
+        <span className="card-num">{p.category}</span>
+      </div>
+      <h3>{p.title}</h3>
+      <p className="summary">{p.summary}</p>
+      {p.strip && (
+        <div className="strip">
+          {p.strip.map((node, i) => (
+            <React.Fragment key={node}>
+              <span className="node">{node}</span>
+              {i < p.strip.length - 1 && <span className="arrow">→</span>}
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+      <dl className="fields">
+        {p.fields.map(([dt, dd]) => (
+          <React.Fragment key={dt}>
+            <dt>{dt}</dt><dd>{dd}</dd>
+          </React.Fragment>
+        ))}
+      </dl>
+      {p.mock === "monitor" && <MonitorMock />}
+      {p.mock === "cnab" && <CnabMock />}
+      <div className="tags">
+        {p.tags.map((t) => (
+          <button
+            key={t}
+            type="button"
+            className={`tag ${t === activeTag ? "active" : ""}`}
+            onClick={() => setActiveTag(activeTag === t ? null : t)}
+            aria-pressed={t === activeTag}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+    </Reveal>
+  );
+}
+
+function App() {
+  const [activeTag, setActiveTag] = useState(null);
+
+  return (
+    <>
+      <nav className="top">
+        <div className="wrap">
+          <div className="brand">Yago <span>Cavalcante</span></div>
+          <ul>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#ia-dev">IA no desenvolvimento</a></li>
+            <li><a href="#stack">Stack</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div className="wrap">
+        <header className="hero">
+          <div className="hero-grid">
+            <div>
+              <p className="eyebrow">Data Engineering | Backend Python | IA aplicada</p>
+              <h1>Yago Cavalcante — dados em <em>produção</em>, de ponta a ponta.</h1>
+              <p className="role">Pipelines, APIs, observabilidade e automações com Python, PostgreSQL, Airflow e IA aplicada.</p>
+              <p className="lede">Construo pipelines, APIs e automações de dados com Python, PostgreSQL/Supabase, FastAPI, Airflow e LLMs, conectando fontes externas, tratamento de dados, backend e operação em ambientes reais de produção.</p>
+              <div className="hero-pipe" aria-hidden="true">
+                <div className="track"><span className="pulse"></span></div>
+                <div className="labels">
+                  <span>extração</span><span>transformação</span><span>observabilidade</span><span>você, agora</span>
+                </div>
+              </div>
+              <div className="cta-row">
+                <a className="btn primary" href="#projetos">Ver projetos</a>
+                <a className="btn" href={CV_URL} target="_blank" rel="noopener noreferrer">Baixar currículo</a>
+                <a className="btn" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a className="btn" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
+              </div>
+              <div className="contact-row">
+                <a href="mailto:yago.cavalcante@outlook.com.br">yago.cavalcante@outlook.com.br</a>
+                <a href="tel:+5511954468564">(11) 95446-8564</a>
+              </div>
+            </div>
+            <div className="portrait-frame">
+              <div className="blob" aria-hidden="true"></div>
+              <img src={PORTRAIT_SRC} alt="Retrato de Yago Cavalcante" />
+              <div className="status-chip"><span className="pill ok">disponível</span></div>
+            </div>
+          </div>
+        </header>
+
+        <section id="projetos">
+          <Reveal as="div" className="section-head">
+            <h2>Projetos</h2>
+            <span className="idx">{String(PROJECTS.length).padStart(2, "0")} registros</span>
+          </Reveal>
+          <Reveal as="p" className="section-note">
+            Sistemas reais em produção, não exercícios — cada um resolveu um problema concreto de infraestrutura de dados. Nomes de empregador, clientes e dados específicos foram omitidos.
+          </Reveal>
+          <div className="grid">
+            {PROJECTS.map((p, i) => (
+              <ProjectCard key={p.id} p={p} index={i} activeTag={activeTag} setActiveTag={setActiveTag} />
+            ))}
+          </div>
+        </section>
+
+        <section id="ia-dev">
+          <Reveal as="div" className="section-head">
+            <h2>IA no desenvolvimento</h2>
+          </Reveal>
+          <Reveal as="p" className="ia-dev-text">
+            Uso Claude Code, ChatGPT e LLMs como ferramenta de engenharia: especificação, quebra de tarefas, geração assistida, revisão crítica, testes, documentação e gerenciamento de contexto via arquivos .md. A IA não substitui validação técnica: toda saída precisa ser revisada, testada e ajustada antes de ir para produção.
+          </Reveal>
+          <Reveal as="ul" className="ia-dev-list">
+            {IA_DEV_ITEMS.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </Reveal>
+        </section>
+
+        <section id="stack">
+          <Reveal as="div" className="section-head">
+            <h2>Stack</h2>
+          </Reveal>
+          <Reveal as="p" className="section-note">
+            Clique numa tecnologia pra ver em quais projetos ela aparece.
+          </Reveal>
+          <div className="stack-grid">
+            {STACK.map((g) => (
+              <Reveal as="div" className="stack-group" key={g.group}>
+                <h4>{g.group}</h4>
+                <div className="tags">
+                  {g.items.map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      className={`tag ${t === activeTag ? "active" : ""}`}
+                      onClick={() => setActiveTag(activeTag === t ? null : t)}
+                      aria-pressed={t === activeTag}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          {activeTag && (
+            <p className="filter-hint">
+              filtrando por <strong>{activeTag}</strong> — <button onClick={() => setActiveTag(null)}>limpar</button>
+            </p>
+          )}
+        </section>
+
+        <footer id="contato">
+          <p className="note">Sistemas descritos acima estão em produção; nomes de empregador, clientes e dados específicos foram deliberadamente omitidos deste registro.</p>
+          <p className="stamp">Yago Cavalcante<br/>yago.cavalcante@outlook.com.br<br/>(11) 95446-8564</p>
+        </footer>
+      </div>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
